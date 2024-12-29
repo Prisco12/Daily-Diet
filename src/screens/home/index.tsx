@@ -1,9 +1,11 @@
 import { Header } from "@components/Header";
 import { Container, Title } from "./styles";
 import { Card } from "@components/Card";
-import { Button } from "@components/Button";
+// import { Button } from "@components/Button";
 import { View } from "react-native";
 import { Typography } from "@components/Typhography";
+import { Button } from "@components/Button";
+import { Plus, Pencil } from "phosphor-react-native";
 
 
 export function HomeScreen() {
@@ -22,7 +24,7 @@ export function HomeScreen() {
                     Refeições
                 </Typography>
                 
-                <Button />
+                <Button title="Nova Refeição" icon={<Plus color="white" size={18} /> } onPress={() => console.log('Nova refeição')}/>
             </View>
         </Container>
     )
