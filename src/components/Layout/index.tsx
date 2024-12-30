@@ -1,6 +1,7 @@
 import { Typography } from "@components/Typhography";
-import { Container, Content, Header } from "./styles";
+import { BackButton, Container, Content, Header } from "./styles";
 import React from "react";
+import { ArrowLeft } from "phosphor-react-native";
 
 type LayoutProps = {
     header: JSX.Element | string;
@@ -12,7 +13,12 @@ export function Layout({...props}: LayoutProps) {
         <Container>
             <Header>
                 {typeof props.header === 'string' ? (
-                    <Typography>{props.header}</Typography>
+                    <>
+                        <BackButton>
+                            <ArrowLeft />
+                        </BackButton>
+                        <Typography>{props.header}</Typography>
+                    </>
                     ) : (
                     <> {props.header} </>
                     )}

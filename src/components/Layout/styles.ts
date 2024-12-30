@@ -6,8 +6,14 @@ export const Container = styled.View`
 `
 
 export const Header = styled.View`
+    align-items: center;
+    justify-content: space-between;
+    flex-direction: row;
+
     padding: 50px 24px 20px;
 `
+export const BackButton = styled.TouchableOpacity``
+
 export const Content = styled.View`
     flex: 1;
     align-items: center;
