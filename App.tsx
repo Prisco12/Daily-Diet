@@ -4,6 +4,8 @@ import { HomeScreen } from '@screens/home';
 import { ThemeProvider } from 'styled-components/native';
 import theme from '@theme';
 import { Loading } from '@components/Loading';
+import { Routes } from '@routes/index';
+import { StatisticsScreen } from '@screens/statistics';
 
 export default function App() {
   const [fontsLoaded] = useFonts({
@@ -17,7 +19,7 @@ export default function App() {
         backgroundColor="transparent"
         translucent
       />
-        {fontsLoaded ? <HomeScreen/> : <Loading />}
+        {fontsLoaded ? <Routes/> : <Loading />}
     </ThemeProvider>
   );
 }

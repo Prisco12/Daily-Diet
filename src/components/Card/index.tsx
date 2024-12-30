@@ -39,7 +39,8 @@ export function Card({
                 ))
             }
 
-            <Typography 
+            <Typography
+                textAlign="center"
                 fontSize={titleFontSize} 
                 color="gray_1"
                 fontFamily="bold"
@@ -47,7 +48,8 @@ export function Card({
                 >
                 {props.title}
             </Typography>
-            <Typography 
+            <Typography
+                textAlign="center"
                 fontSize="body_sm" 
                 color="gray_2"
                 fontFamily="regular"
