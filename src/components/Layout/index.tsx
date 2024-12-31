@@ -2,25 +2,34 @@ import { Typography } from "@components/Typhography";
 import { BackButton, Container, Content, Header } from "./styles";
 import React from "react";
 import { ArrowLeft } from "phosphor-react-native";
+import { Text } from "react-native";
 
-type LayoutProps = {
-    header: JSX.Element | string;
-    children: React.ReactNode;
+export type LayoutColor = {
+    bg?: 'gray' | 'green' | 'red';
 }
 
-export function Layout({...props}: LayoutProps) {
+type LayoutProps = LayoutColor & {
+    header: JSX.Element | string;
+    children: React.ReactNode;
+    onPressBrack?: () => void;
+}
+
+export function Layout({bg = 'gray', ...props}: LayoutProps) {
     return (
-        <Container>
+        <Container bg={bg}>
             <Header>
                 {typeof props.header === 'string' ? (
                     <>
-                        <BackButton>
+                        <BackButton style={{width: '15%'}} onPress={props.onPressBrack}>
                             <ArrowLeft />
                         </BackButton>
-                        <Typography>{props.header}</Typography>
+                        <Typography fontFamily="bold" fontSize="title_sm" lineHeight="lg" textAlign="center" style={{width: '60%'}} >{props.header}</Typography>
+                        <Typography style={{width: '15%'}} />
                     </>
                     ) : (
-                    <> {props.header} </>
+                    <>
+                        {props.header}
+                    </>
                     )}
             </Header>
             <Content>

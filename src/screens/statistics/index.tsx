@@ -12,11 +12,17 @@ export function StatisticsScreen() {
         }
     return (
         <Container>
-            <Layout 
-                header=
-                'Estatísticas Gerais'
-                // {<Card bg="green" iconPosition='left' title="90.86%" subtitle="das refeições cadastradas" onPress={goBack}/>}
-
+            <Layout
+                bg="green"
+                header={
+                <Card 
+                    bg="green" 
+                    iconPosition='left' 
+                    title="90.86%" 
+                    subtitle="das refeições cadastradas" 
+                    onPress={goBack}/>
+            }
+                onPressBrack={goBack}
             >
                 <Typography fontFamily="bold" fontSize="title_xs" style={{marginBottom: 20}}>Estatísticas Gerais</Typography>
 
