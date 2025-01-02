@@ -2,7 +2,7 @@ import { Typography } from "@components/Typhography";
 import { BackButton, Container, Content, Header } from "./styles";
 import React from "react";
 import { ArrowLeft } from "phosphor-react-native";
-import { Text } from "react-native";
+import { Text, ViewProps, ViewStyle } from "react-native";
 
 export type LayoutColor = {
     bg?: 'gray' | 'green' | 'red';
@@ -12,6 +12,7 @@ type LayoutProps = LayoutColor & {
     header: JSX.Element | string;
     children: React.ReactNode;
     onPressBrack?: () => void;
+    style?: ViewStyle;
 }
 
 export function Layout({bg = 'gray', ...props}: LayoutProps) {
@@ -32,7 +33,7 @@ export function Layout({bg = 'gray', ...props}: LayoutProps) {
                     </>
                     )}
             </Header>
-            <Content>
+            <Content style={props.style}>
                 {props.children}
             </Content>
         </Container>

@@ -17,7 +17,7 @@ export const Container = styled.View<CardColor>`
     background-color: ${({theme, bg}) => {
         const { colors } = theme
 
-        if (bg === 'gray') return colors.base.gray_6
+        if (bg === 'gray') return colors.base.gray_5
         if (bg === 'green') return colors.brand.green_light
         if (bg === 'red') return colors.brand.red_light
     }};

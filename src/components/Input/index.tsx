@@ -4,6 +4,7 @@ import { useTheme } from "styled-components/native";
 import { dateMask, hourMask } from "@utils/masks";
 import { TextInputProps } from "react-native";
 
+
 export type InputType = {
     height?: number;
 }
@@ -39,7 +40,7 @@ export function Input({mask, label, onInputMaskChange, ...props}: InputProps) {
                 onChangeText={(text) => handleChange(text)}
                 {...props}
             />
-            <Typography fontFamily="bold" fontSize="body_xs" color="red_dark" style={{marginBottom: -10}}>{props.errorMessage}</Typography>
+            {/* <Typography fontFamily="bold" fontSize="body_xs" color="red_dark" style={{marginBottom: -10}}>{props.errorMessage}</Typography> */}
         </Container>
     )
 }

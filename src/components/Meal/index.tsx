@@ -7,7 +7,7 @@ export type MealStatus = { isOnTheDiet: boolean; }
 type MealProps = MealStatus & PressableProps &{
     id: string;
     hour: string;
-    description: string;
+    name: string;
 }
 
 export function Meal({...props}: MealProps) {
@@ -15,7 +15,7 @@ export function Meal({...props}: MealProps) {
         <Container {...props}>
             <Typography fontSize="body_xs" fontFamily="bold">{props.hour}</Typography>
             <Divider />
-            <Typography style={{flex: 1}} numberOfLines={1}>{props.description}</Typography>
+            <Typography style={{flex: 1}} numberOfLines={1}>{props.name}</Typography>
             <Status isOnTheDiet={props.isOnTheDiet}/>
         </Container>
     )

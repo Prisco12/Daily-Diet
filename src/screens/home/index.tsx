@@ -14,73 +14,23 @@ import { MealDTO } from "@dtos/MealDTO";
 import { mealsList } from "@utils/list";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { MEAL_COLLECTION } from "@storage/storageConfig";
+import { statsSorter } from "@utils/statisctics";
 
 
 type Meals = {
-	date: string
-	data: MealDTO[]
+    date: string
+    data: MealDTO[]
+}
+
+type Statistic = {
+    percentage: string
+    isMealsOnTheDiet: boolean
 }
 
 export function HomeScreen() {
 
     const [meals, setMeals] = useState<Meals[]>([])
-    // const meals = [
-    // {
-    //     title: '12.08.23',
-    //     data: [
-    //         {
-    //             id: "01",
-    //             hour: "20:00",
-    //             description: "X-tusasdo",
-    //             isOnTheDiet: false
-    //         },
-    //         {
-    //             id: "02",
-    //             hour: "18:00",
-    //             description: "X-Salada",
-    //             isOnTheDiet: true
-    //         }
-    //     ]
-    // },
-    // {
-    //     title: '13.08.23',
-    //     data: [
-    //         {
-    //             id: "03",
-    //             hour: "20:00",
-    //             description: "X-Jump",
-    //             isOnTheDiet: false
-    //         },
-    //         {
-    //             id: "04",
-    //             hour: "18:00",
-    //             description: "X-Hugo",
-    //             isOnTheDiet: true
-    //         },
-    //         {
-    //             id: "05",
-    //             hour: "18:00",
-    //             description: "X-Hugo",
-    //             isOnTheDiet: true
-    //         },
-    //         {
-    //             id: "06",
-    //             hour: "18:00",
-    //             description: "X-Hugo",
-    //             isOnTheDiet: true
-    //         },
-    //         {
-    //             id: "07",
-    //             hour: "18:00",
-    //             description: "X-Hugo",
-    //             isOnTheDiet: true
-    //         }
-    //     ]
-    // }
-
-    // ]
-
-    
+    const [statistic, setStatistic] = useState<Statistic>()
 
     const navigation = useNavigation()
 
@@ -92,40 +42,60 @@ export function HomeScreen() {
         navigation.navigate('register')
     }
 
+    function handleGoMeal(id: string) {
+        navigation.navigate('meal', {id: id})
+    }
+
     async function fetchMeals() {
         const data = await mealsGetAll()
         const meal = mealsList(data)
+        
+        const { percentage, mealsOnTheDiet, mealsOutOnDiet } = statsSorter(data)
+
+        const isMealsOnTheDiet = mealsOnTheDiet >= mealsOutOnDiet ? true : false
+
+        const statistics = {
+            percentage,
+            isMealsOnTheDiet,
+        }
+
+        setStatistic(statistics)
+
         setMeals(meal)
         return meal
     }
 
     useFocusEffect(
-		useCallback(() => {
-			fetchMeals()
-		}, []),
-	)
-
+        useCallback(() => {
+            fetchMeals()
+        }, []),
+    )
     return (
         <Container>
             <Header />
-            <Card
-                title="90.86%"
-                subtitle="das refeiçõesss dentro da dieta"
-                bg="green"
-                iconPosition="right"
-                onPress={() => console.log(meals )}
-            />
-            <View style={{ marginTop: 40 }}>
-                <Typography fontSize="title_sm" style={{marginBottom: 8}}>
-                    Refeições
-                </Typography>
-                
-                <Button title="Nova Refeição" icon={<Plus color="white" size={18} /> } onPress={handleGoRegister}/>
-            </View>
+            { statistic  && (
+                <>
+                 <Card
+                 title={statistic.percentage}
+                 subtitle={`${statistic.percentage === '0,00%' ? 'Nenhuma refeição cadastrada' : `das refeições ${statistic.isMealsOnTheDiet ? 'dentro' : 'fora'} da dieta`}`}
+                 bg={statistic.percentage === '0,00%' ? 'gray' : statistic.isMealsOnTheDiet ? 'green' : 'red'}
+                 iconPosition="right"
+                 onPress={handleGoStatistic}
+                />
+            
+                <View style={{ marginTop: 40 }}>
+                    <Typography fontSize="title_sm" style={{marginBottom: 8}}>
+                        Refeições
+                    </Typography>
+                    
+                    <Button title="Nova Refeição" icon={<Plus color="white" size={18} /> } onPress={handleGoRegister}/>
+                </View>
+                </>
+            )}
             <SectionList 
                 sections={meals} 
                 keyExtractor={(item) => item.id}
-                renderItem={({item}) => <Meal key={item.id} {...item} onPress={() => console.log(item.description)}/>}
+                renderItem={({item}) => <Meal key={item.id} {...item} onPress={() => handleGoMeal(item.id)}/>}
                 renderSectionHeader={({section: {date}}) => (
                     <Typography 
                         fontSize="title_sm" 

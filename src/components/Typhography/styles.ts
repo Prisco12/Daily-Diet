@@ -12,6 +12,8 @@ export const Container = styled.Text<TypographyStyle>`
         return theme.line_height[lineHeight ?? 'md']
     }}px;
 
+    /* background-color: red; */
+
     font-size: ${({ theme, fontSize }) => {
         if (fontSize === 'body_xs') return theme.font_size.body.xs
         if (fontSize === 'body_sm') return theme.font_size.body.sm

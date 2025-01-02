@@ -1,5 +1,5 @@
 import { Typography } from "@components/Typhography";
-import { Container, Title } from "./styles";
+import { Container } from "./styles";
 import { TouchableOpacityProps } from "react-native";
 
 
@@ -18,7 +18,15 @@ export function Button({type = 'solid', isActive = true, ...props}: ButtonProps)
     return (
         <Container type={type} isActive={isActive} disabled={!isActive} {...props}>
             {props.icon && props.icon}
-            <Title type={type} {...props}>{props.title}</Title>
+           <Typography
+				color={type === 'solid' ? 'white' : 'gray_1'}
+				fontFamily="bold"
+                lineHeight="sm"
+                fontSize="body_sm"
+				style={{ marginHorizontal: 12 }}
+			>
+				{props.title}
+			</Typography>
         </Container>
     )
 }

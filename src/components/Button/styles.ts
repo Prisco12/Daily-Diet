@@ -5,7 +5,7 @@ import { Typography } from "@components/Typhography";
 export const Container = styled.TouchableOpacity<ButtonProps>`
     width: 100%;
     height: 50px;
-    padding: 16px 24px;
+    padding: 16px 0;
 
     border-radius: 6px;
 
@@ -27,12 +27,3 @@ export const Container = styled.TouchableOpacity<ButtonProps>`
     }};
     border-style: solid;
 `
-
-export const Title = styled(Typography).attrs<ButtonProps>(({type}) => ({
-    fontFamily: 'bold',
-    color: type === 'solid' ? 'white' : 'gray_1',
-}))<ButtonProps>`
-    margin: 0 12px;
-`
-
-// export const Icon = styled.Image.attrs({source: })``
